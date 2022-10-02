@@ -160,16 +160,91 @@
 	}
 	return 0;
 }*/
-int main()//带有getchar的while循环
+/*int main()//带有getchar的while循环
 {
 	int a = 0;
 	//当getchar遇到Ctrl+（z）类似的字符时，getchar会获取EOF，即结束程序输出
 	while ((a = getchar()) != EOF)//EOF为文件结束标志 - end of file -> -1
 	{
 		putchar(a);
-	}
+	}*/
 	/*int a = getchar();
 putchar(a);
 printf("%c", a);
-return 0;*///此处会打印两次输入的字符，即putchar打印一次，printf打印一次
-}
+return 0;//此处会打印两次输入的字符，即putchar打印一次，printf打印一次
+}*/
+
+
+
+//分支与循环2
+/*#include<stdio.h>
+int main()
+{
+	int ch = 0;//定义变量ch
+	//EOF是文件结束标志
+	//while ((ch = getchar()) != EOF)//getchar用于接受一个字符，然后赋值给ch，同时Ctrl + Z会触发EOF，结束文件
+	//{
+	//	putchar(ch);//输出变量ch的字符
+	//}
+	int get = 0;
+	char password[20] = { 0 };
+	printf("请输入密码:");
+	scanf_s("%d", password);//输入密码，并存放在password数组中
+	//此时缓冲区还剩一个'\n'
+	//读取一下'\n'
+	getchar();//此处gerchar用意为读走缓冲区中的'\n'
+	printf("请确认(Y/N):");//此处有问题，此行输出后程序结束，没有进行下面的程序
+	//上面的程序表示为用两次gerchar读取缓冲区中的\n
+	get = getchar();//Y/N
+	if (get == 'Y')
+	{
+		printf("确认成功\n");
+	}
+	else
+	{
+		printf("确认失败");
+	}
+	return 0;
+	//printf("%d\n", '\n');//此处打印是10
+	//return 0;
+}*/
+//如果上面的password输入123456 ABCD，同样会再次出现问题，因为第一次password读取123456还留下了(空格)ABCD，第二次getchar读取了空格，便不会再读ABCD，if语句读取了ABCD的A，为确认失败
+/*#include<stdio.h>
+int main()
+{
+	int ch = 0;
+	int get = 0;
+	char password[20] = { 0 };
+	printf("请输入密码:");
+	scanf_s("%d", password);//此处输入123456 ABCD，若需要读取完所有数值，需要password读取一次，getchar读取两次或多次直到缓冲区没有字符为止
+	//所以此处需要加入一个while循环以完全读完缓冲区
+	while ((ch = getchar()) != '\n')//\n意为缓冲区中结束的位置
+	{
+		//由于只需要getchar重复读缓冲区直到消耗完，不需要执行任何额外程序
+		;//;代表一个空语句
+	}
+	printf("请确认(Y/N):");
+	get = getchar();
+	if (get == 'Y')
+	{
+		printf("确认成功\n");
+	}
+	else
+	{
+		printf("确认失败");
+	}
+	return 0;
+}*/
+
+/*#include<stdio.h>//此段代码与后期学习的大小写字母转换有关
+int main()
+{
+	int ch = 0;
+	while ((ch = getchar()) != EOF)
+	{
+		if (ch < '0' || ch > '5')
+			continue;
+		putchar(ch);
+	}
+	return 0; 
+}*/
