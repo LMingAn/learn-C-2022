@@ -107,7 +107,7 @@
 }*/
 
 //2.计算1! + 2! + 3! + ... + 10! --> 1 + 1*2 + 1*2*3 + ... + 1*2*3*4*5*6*7*8*9*10
-int main()
+/*int main()
 {
 	int a, n, sum = 0, he = 1;
 	for (n = 1; n <= 10; n++)//限制数量
@@ -121,5 +121,38 @@ int main()
 		sum = he + sum;
 	}
 	printf("sum = %d\n", sum);
+	return 0;
+}*/
+/*int main()
+{
+	int a, n, sum = 0, he = 1;
+	for (n = 1; n <= 10; n++)
+	{
+		he = he * n;
+		//n的阶乘
+		sum = he + sum;
+	}
+	printf("sum = %d\n", sum);
+	return 0;
+}*/
+
+//3.在一个有序数组中查找具体的某个数字n。编写int binsearch(int x, int v[], int n); 功能：在v[0]<=v[1]<=[2]<=...<=v[n-1]的数组中查找x.
+int main()
+{
+	int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	int a = 7;
+	//写一个代码，在arr数组（有序的）中找到7
+	int k;
+	int h = sizeof(arr) / sizeof(arr[0]);
+	for (k = 0; k < h; k++)//此为产生下标，h为arr数组的字符长度，即元素个数
+	{
+		if (a == arr[k])
+		{
+			printf("找到了，下标是：%d\n", k);
+			break;
+		}
+	}
+	if (k == h)
+		printf("已查找完毕，未发现数字");
 	return 0;
 }
