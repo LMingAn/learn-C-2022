@@ -615,3 +615,201 @@ static修饰的变量(静态变量)
 //	printf("%d\n", fn);
 //	return 0;
 //}
+
+//--------------------------------------------------------------
+//作业解析
+/*
+while语句：
+条件判断句的执行次数总是比循环语句多一次
+*/
+
+//编写程序：数一下1到100的所有整数中出现多少个数字9
+//#include<stdio.h>
+//int main()
+//{
+//	int a, b, c = 0;
+//	scanf_s("%d", &a);
+//	for (b = 1; b <= a; b++)
+//	{
+//		if (b % 10 == 9)//判断个位数上是否有9
+//			c++;
+//		if (b / 10 == 9)//判断十位数上是否有9
+//			c++;
+//	}
+//	printf("%d", c);
+//	return 0;
+//}
+
+//编写程序：计算1/1 - 1/2 + 1/3 - 1/4......+ 1/99 - 1/100的值
+//解法一-->for循环单独相加再相减
+//#include<stdio.h>
+//int main()
+//{
+//	float a, b, c = 0, d = 0, sum;//c为奇数分母分数之和，d为偶数分母分数之和
+//	scanf_s("%f", &a);
+//	for (b = 1; b <= a; b += 2)//计算奇数分母分数之和
+//	{
+//		c += 1 / b;
+//	}
+//	for (b = 2; b <= a; b += 2)//计算偶数分母分数之和
+//	{
+//		d += 1 / b;
+//	}
+//	sum = c - d;
+//	printf("%f", sum);
+//	return 0;
+//}
+//解法二-->if判断相减或相加
+//#include<stdio.h>
+//int main()
+//{
+//	float a, c = 0;//a输入总值，b判断值，c为和
+//	int b;
+//	scanf_s("%f", &a);
+//	for (b = 1; b <= a; b++)
+//	{
+//		if (b % 2 == 0)//若分数分母为偶数
+//			c -= 1.0 / b;
+//		else//分数分母为奇数
+//			c += 1.0 / b;
+//	}
+//	printf("%f", c);
+//	return 0;
+//}
+//解法三-->符号变换（最高效的解法）
+//#include<stdio.h>
+//int main()
+//{
+//	float sum = 0;
+//	int a, b, c = 1;
+//	scanf_s("%d", &a);
+//	for (b = 1; b <= a; b++)
+//	{
+//		sum += c * 1.0 / b;
+//		c = -c;
+//	}
+//	printf("%f", sum);
+//	return 0;
+//}
+
+//逆向打印字符串--不使用字符串操作函数
+//正常函数解法
+//#include<stdio.h>
+//int a_strlen(char* a)
+//{
+//	int b = 0;//b用于计算字符串长度
+//	while (*a != '\0')
+//	{
+//		b++;
+//		a++;
+//	}
+//	return b;
+//}
+//int take_a(char* a)
+//{
+//	int left = 0, right = a_strlen(a) - 1;
+//	while (left < right)
+//	{
+//		/*char take = a[right];
+//		a[right] = a[left];
+//		a[left] = take;*/
+//		//另外一种写法
+//		char take = *(a + left);
+//		*(a + left) = *(a + right);
+//		*(a + right) = take;
+//		left++;
+//		right--;
+//	}
+//}
+//int main()
+//{
+//	char a[] = "lanxiaogui";
+//	take_a(a);//数组名a是数组a首元素的地址
+//	printf("%s", a);
+//	return 0;
+//}
+//递归实现--大事化小思路
+//#include<stdio.h>
+//int a_strlen(char* a)
+//{
+//	int b = 0;
+//	while (*a != '\0')
+//	{
+//		b++;
+//		a++;
+//	}
+//	return b;
+//}
+//int take_a(char* a)
+//{
+//	int len = a_strlen(a);
+//	char take = *a;//1-->将首元素放入一个空变量中
+//	*a = *(a + len - 1);//2-->将首元素与最后一个元素交换
+//	*(a + len - 1) = '\0';//3-->将最后一个元素赋值\0
+//	//需要判断条件，否则会一直重复递归
+//	if (a_strlen(a + 1) >= 2)
+//	{
+//		take_a(a + 1);//4
+//	}
+//	*(a + len - 1) = take;//5
+//}
+//int main()
+//{
+//	char a[] = "lanxiaogui";
+//	take_a(a);//数组名a是数组a首元素的地址
+//	printf("%s", a);
+//	return 0;
+//}
+
+//计算一个数的每位之和--限递归实现
+//#include<stdio.h>
+//int sum(int a)
+//{
+//	//int b = a % 10, c = 0;//b为当前a的个位数，c为总和
+//	//if (a >= 1)
+//	//	c = b + sum(a / 10);
+//	//else
+//	//	return c;
+//	//简化：
+//	if (a >= 1)
+//		return a % 10 + sum(a / 10);
+//	else
+//		return 0;//此处可返回a，也可返回0，据题意而定
+//}
+//int main()
+//{
+//	int a, b;
+//	scanf_s("%d", &a);
+//	b = sum(a);
+//	printf("%d", b);
+//	return 0;
+//}
+
+//计算n的k次方--限递归实现
+#include<stdio.h>
+double num(int n, int k)
+{
+	int sum;
+	if (k > 0)
+	{
+		return n * num(n, k-1);
+	}
+	else if (k == 0)
+		return 1;
+	else
+		return 1.0 / (num(n, -k));
+
+}
+int main()
+{
+	int n, k;
+	scanf_s("%d %d", &n, &k);
+	double a = num(n, k);
+	printf("%lf", a);
+	return 0;
+}
+
+//细节问题：
+/*
+1.递归层次太深，会出现栈溢出问题
+*/
