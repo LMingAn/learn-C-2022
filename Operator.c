@@ -335,3 +335,162 @@
 //	printf("%d\n", d);
 //	return 0;
 //}
+
+
+
+//下标引用操作符
+
+//int main()
+//{
+//	int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//	//下标        0  1  2  3  4
+//	printf("%d\n", a[4]);//[] - 下标引用操作符
+//	//3 + 5
+//	return 0;
+//}
+
+
+
+//函数调用操作符
+
+//int add(int a, int b)
+//{
+//	return a + b;
+//}
+//void test()
+//{}
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int ret = add(a, b);//() - 函数调用操作符
+//	test();
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+
+//结构体成员访问操作符
+//.
+//->
+
+//struct Book
+//{
+//	//结构体的成员变量
+//	char name[20];
+//	char id[20];
+//	int price;
+//};
+//int main()
+//{
+//	int num = 10;
+//	struct Book b = { "C语言", "C2022", 55 };
+//	struct Book *pb = &b;
+//	printf("书名：%s\nID：%s\n定价：%d", b.name, b.id, b.price);
+//	printf("书名：%s\nID：%s\n定价：%d", (*pb).name, (*pb).id, (*pb).price);
+//	printf("书名：%s\nID：%s\n定价：%d", pb->name, pb->id, pb->price);//pb是一种指针，指向结构体的成员 -- 结构体指针->成员名
+//	return 0;
+//}
+
+
+
+//表达式求值
+
+//int main()
+//{
+//	int a = 3;
+//	int b = 5;
+//	int c = a + b * 7;
+//}
+
+
+
+//整型提升
+
+//int main()
+//{
+//	char a = 3;
+//	//00000000000000000000000000000011
+//	//00000011 - a
+//	char b = 127;
+//	//01111111 - b
+//	char c = a + b;
+//	//00000000000000000000000000000011
+//	//00000000000000000000000001111111
+//	//
+//	//00000000000000000000000010000010
+//	//10000010 - c
+//	//11111111111111111111111110000010 -- 补码
+//	//11111111111111111111111110000001 -- 反码
+//	//10000000000000000000000001111110 00 原码
+//	//a和b都是char类型的，都没有达到一个int的大小
+//	//于是这里就会发生整型提升
+//	printf("%d\n", c);
+//	return 0;
+//}
+//当变量自身的数据类型大小达不到整型类型数据大小，参与运算就会整型提升
+//int main()
+//{
+//	char c = 1;
+//	printf("%u\n", sizeof(c));//1
+//	printf("%u\n", sizeof(+c));//4
+//	printf("%u\n", sizeof(-c));//4
+//	printf("%u\n", sizeof(!c));//4 -- gcc - 4
+//	return 0;
+//}
+
+//运算符的优先级决定计算顺序
+//int c = a + b * 7
+//当优先级不起作用，结合性决定顺序
+//int c = a + b + 7
+//
+
+//特殊情况 -- 是一个有问题，有歧义的问题表达式
+//int main()
+//{
+//	int c = 2;
+//	printf("%d\n", c + --c);
+//	return 0;
+//}
+
+//问题代码
+//int fun()
+//{
+//	static int conut = 1;
+//	return ++conut;
+//}
+//int main()
+//{
+//	int answer;
+//	answer = fun() - fun() * fun();//2 - 3 * 4
+//	//无法确定上述三个fun函数哪一个先执行，顺序不同，结果也不同
+//	printf("%d\n", answer);
+//	return 0;
+//}
+//int main()
+//{
+//	int i = 1;
+//	int ret = (++i) + (++i) + (++i);//VS计算顺序是先计算++i，所有计算完再计算(++i)+(++i) 
+//	printf("%d\n", ret);
+//	return 0;
+//}
+
+
+
+//逗号表达式的特殊使用
+//int main()
+//{
+//	int a[] = { 1, 2, (3, 4), 5 };//a[] = { 1, 2, 4, 5 };
+//	printf("%d\n", sizeof(a));
+//	return 0;
+//}
+
+int main()
+{
+	char str[] = "hello bit";
+	printf("%d %d\n", sizeof(str), strlen(str));//sizeof包含字符串中的\0，strlen不包含字符串中的\0
+	//strlen - 函数 - 求字符串长度，找\0之前出现的字符个数
+	//sizeof - 操作数 - 计算变量/类型所占内存大小，单位是字节
+	return 0;
+}
